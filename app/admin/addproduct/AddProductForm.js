@@ -55,10 +55,15 @@ const handleAddProduct=async()=>{
 })
   .then(response => {
     console.log('Success:', response.data);
+    alert("Product is added");
+    window.location.reload();
+    
     // Handle success, e.g., show a success message to the user
   })
   .catch(error => {
     console.error('Error:', error.response.data);
+    alert("Something is wrong");
+ 
     // Handle error, e.g., show an error message to the user
   });
 }
