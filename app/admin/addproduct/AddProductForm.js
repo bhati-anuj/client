@@ -48,7 +48,7 @@ const handleAddProduct=async()=>{
   formData.append("photo", images)
 
 
- await axios.post("https://salon-server-orky.onrender.com/api/v1/products/addProduct", formData, {
+ await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/v1/products/addProduct`, formData, {
   headers: {
     'Content-Type': 'multipart/form-data',
   },

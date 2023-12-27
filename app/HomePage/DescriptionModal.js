@@ -1,15 +1,47 @@
 "use client";
 import React, { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { AvatarIcon, Cross2Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import ReviewForm from "../components/ReviewForm";
 
 const ProductDetails = ({ productDes }) => {
-  console.log(productDes), "modal";
+  const generateStars = (rating) => {
+    const starCount = Math.round(rating); // Round the rating to the nearest whole number
+    const stars = "★".repeat(starCount) + "☆".repeat(5 - starCount); // Use ★ for filled star and ☆ for empty star
+    return stars;
+  };
+  const reviewArr = [
+    {
+      name: "Anuj",
+      rating: "4",
+      review: "So beautiful So eligent just looking like a wow",
+    },
+    {
+      name: "Kamal",
+      rating: "4",
+      review: "So beautiful So eligent just looking like a wow",
+    },
+    {
+      name: "Saurabh",
+      rating: "3",
+      review: "So beautiful So eligent just looking like a wow",
+    },
+    {
+      name: "Anuj",
+      rating: "2",
+      review: "So beautiful So eligent just looking like a wow",
+    },
+    {
+      name: "Anuj",
+      rating: "5",
+      review: "So beautiful So eligent just looking like a wow",
+    },
+  ];
   if (productDes) {
     return (
       <>
-        <div className="grid grid-cols-4 grid-rows-5 gap-4">
+        <div className="grid grid-cols-4 grid-rows-5 gap-4 ">
           <div className="col-span-2 row-span-4">
             <Image
               src={productDes.img}
@@ -20,10 +52,9 @@ const ProductDetails = ({ productDes }) => {
           </div>
           <div className="col-span-2 col-start-3">{productDes.name}</div>
           <div className="col-span-2 col-start-3 row-start-2">
-            MRP: ₹{productDes.price} 
+            MRP: ₹{productDes.price}
           </div>
           <div className="col-start-3  row-start-3 flex">
-            {/* Rating: */}
             <svg
               width="35"
               height="25"
@@ -89,6 +120,76 @@ const ProductDetails = ({ productDes }) => {
           </div>
           {/* <div className="col-start-4 row-start-3">5</div> */}
         </div>
+
+        <details>
+          <summary
+            type="button"
+            className="py-3 cursor-pointer w-full px-4 inline-flex justify-center items-center gap-x-2 text-md font-semibold rounded-lg border border-blue-800 text-blue-800 hover:border-blue-500 hover:text-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:border-white dark:text-white dark:hover:text-blue-300 dark:hover:border-blue-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-blue-600"
+          >
+            Write a review
+          </summary>
+          <div className="p-4 bg-gray-100 flex flex-col gap-2">
+            <input
+              type="text"
+              required
+              className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="Your Name"
+            />
+            <input
+              type="text"
+              required
+              className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              placeholder="Your Email"
+            />
+            <textarea
+              className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+              rows="3"
+              placeholder="Tell us your views"
+            />
+            <button
+              type="button"
+              className="py-3 px-4 ms-auto inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent w-auto bg-gray-500 text-white hover:bg-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
+              Post
+            </button>
+          </div>
+          {/* <p>
+            Epcot is a theme park at Walt Disney World Resort featuring exciting
+            attractions, international pavilions, award-winning fireworks and
+            seasonal special events.
+          </p> */}
+        </details>
+        <h1 className="font-bold text-lg mt-4">Customer Review:</h1>
+        {reviewArr.map((item, index) => {
+          return (
+            <div className="rounded border-2 shadow-sm p-2 m-2" key={index}>
+              <div className="flex flex-row gap-2 mb-2">
+                <span class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-red-500 text-sm font-semibold text-white leading-none">
+                  AN
+                </span>
+                <h3 className="font-medium text-md text-center italic">
+                  {item.name}
+                </h3>
+              </div>
+              <p>{item.review}</p>
+              <span>{generateStars(item.rating)}</span>
+
+              {/* <svg
+                width="35"
+                height="25"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.22303 0.665992C7.32551 0.419604 7.67454 0.419604 7.77702 0.665992L9.41343 4.60039C9.45663 4.70426 9.55432 4.77523 9.66645 4.78422L13.914 5.12475C14.18 5.14607 14.2878 5.47802 14.0852 5.65162L10.849 8.42374C10.7636 8.49692 10.7263 8.61176 10.7524 8.72118L11.7411 12.866C11.803 13.1256 11.5206 13.3308 11.2929 13.1917L7.6564 10.9705C7.5604 10.9119 7.43965 10.9119 7.34365 10.9705L3.70718 13.1917C3.47945 13.3308 3.19708 13.1256 3.25899 12.866L4.24769 8.72118C4.2738 8.61176 4.23648 8.49692 4.15105 8.42374L0.914889 5.65162C0.712228 5.47802 0.820086 5.14607 1.08608 5.12475L5.3336 4.78422C5.44573 4.77523 5.54342 4.70426 5.58662 4.60039L7.22303 0.665992Z"
+                  fill="currentColor"
+                  
+                ></path>
+              </svg> */}
+            </div>
+          );
+        })}
       </>
     );
   } else {
@@ -138,7 +239,7 @@ const DescriptionModal = ({ product }) => {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0 backdrop-blur-md" />
-          <Dialog.Content className="data-[state=open]:animate-contentShow  fixed top-[50%] left-[50%] max-h-[90vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none ">
+          <Dialog.Content className="data-[state=open]:animate-contentShow overflow-scroll fixed top-[50%] left-[50%] max-h-[100vh] w-[200vw] max-w-[950px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none ">
             <Dialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
               <div className="p-3 sm:p-1">
                 <div className="text-center">

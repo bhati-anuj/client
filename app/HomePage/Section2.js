@@ -9,7 +9,7 @@ const Section2 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("https://salon-server-orky.onrender.com/api/v1/products");
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/v1/products`);
 
         setProducts(res.data.data);
       } catch (error) {
@@ -19,6 +19,8 @@ const Section2 = () => {
     fetchData();
   }, []);
 
+ if (products.length > 0) {
+  
  
   return (
     <>
@@ -37,6 +39,20 @@ const Section2 = () => {
       </div>
     </>
   );
+} else {
+  return(
+    <div className="min-h-[15rem] flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+  <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+    <div className="flex justify-center">
+      <div className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+  )
+  
+}
 };
 
 export default Section2;
