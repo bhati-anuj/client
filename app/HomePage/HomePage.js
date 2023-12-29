@@ -6,6 +6,8 @@ import Footer from '../components/Footer'
 import SecondHeader from '../components/SecondHeader'
 import Section1 from './Section1'
 import Section2 from './Section2'
+import Link from 'next/link'
+import CategorySection from './CategorySection'
 
 
 const HomePage = () => {
@@ -14,9 +16,10 @@ const HomePage = () => {
     <Header/>
     <SecondHeader/>
     <HeroSection/>
+    <CategorySection/>
+    {/* <Link  href="/[id]" as={`/kamla`}>Dynamic link</Link> */}
     <Section1/>
     <Section2/>
-    
     <Footer/>
     </>
   )

@@ -33,10 +33,10 @@ const CategoriesCard = ({setCategory,setProduct,setSubCategory}) => {
         },
         {
           subname: "Hair Styling",
-          product: ["Hair Color", " Hair Spray", "Gels & Waxes"],
+          product: ["Hair Color", "Hair Spray", "Gels & Waxes"],
         },
         {
-          subname: "Tools",
+          subname: "Tools & Asscessories",
           product: ["Hair Combs", "Hair Brushes", "Dryers"],
         },
       ],
