@@ -4,7 +4,6 @@ import Header from "@/app/components/Header";
 import SecondHeader from "@/app/components/SecondHeader";
 import React, { useEffect, useState } from "react";
 import Card from "@/app/components/Card";
-import CategoryPageComponent from "./CategoryPageComponent";
 import axios from "axios";
 
 const CategoryPageComponent = ({ params }) => {
