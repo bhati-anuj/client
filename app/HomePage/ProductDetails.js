@@ -1,25 +1,44 @@
+"use client";
 import Image from "next/image";
-import makeup from "../../assets/makeup.jpg";
 import ReviewSection from "../components/ReviewSection";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-async function getData(id) {
-  const res = await fetch(`http://localhost:3000/api/${id}`);
+const ProductDetails = ({ id }) => {
+  const [productDes, setProductDes] = useState();
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await axios(`http://localhost:3000/api/${id}`);
+
+        setProductDes(res.data.data);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getData();
+  }, []);
+console.log(productDes);
+  if (!productDes) {
+    return(
+      <>
+    <div className="min-h-[15rem] flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+  <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+    <div className="flex justify-center">
+      <div className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+      </>
+    )
   }
 
-  return res.json();
-}
-
-
-const ProductDetails = async ({ id }) => {
-  const data = await getData(id);
-  const productDes = data.data;
-  
-
-
-  return (
+  if (productDes) {
+ return (
     <div className="p-10">
       <div className="flex mb-4  flex-wrap">
         <div className="flex-1">
@@ -105,6 +124,14 @@ const ProductDetails = async ({ id }) => {
       <ReviewSection productId={id} />
     </div>
   );
+}
+else{
+  return(
+    <div>
+      Something went wrong
+    </div>
+  )
+}
 };
 
 export default ProductDetails;
