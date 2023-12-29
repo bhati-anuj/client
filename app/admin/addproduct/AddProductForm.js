@@ -42,13 +42,13 @@ const handleAddProduct=async()=>{
   formData.append("name", productTitle)
   formData.append('brand', 'loreal');
   formData.append("description", productDescription)
-  formData.append("MRP", mrp)
+  formData.append("mrp", mrp)
   formData.append("marginPer", margin)
   formData.append("price", actualPrice)
   formData.append("photo", images)
 
 
- await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/v1/products/addProduct`, formData, {
+ await axios.post('/api/addproduct', formData, {
   headers: {
     'Content-Type': 'multipart/form-data',
   },
@@ -56,7 +56,7 @@ const handleAddProduct=async()=>{
   .then(response => {
     console.log('Success:', response.data);
     alert("Product is added");
-    window.location.reload();
+    // window.location.reload();
     
     // Handle success, e.g., show a success message to the user
   })

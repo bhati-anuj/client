@@ -9,11 +9,9 @@ const Section1 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER}/api/v1/products`
-        );
-
-        setProducts(res.data.data);
+        const res = await axios.get("/api" );
+console.log(res);
+        setProducts(res.data);
       } catch (error) {
         console.error(error);
       }

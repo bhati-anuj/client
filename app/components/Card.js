@@ -1,11 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import DescriptionModal from "../HomePage/ProductDetails";
 
 const Card = (props) => {
   // console.log(props.product);
-  
+
   return (
     <>
       {/* <!-- Card Blog --> */}
@@ -20,41 +19,37 @@ const Card = (props) => {
           className="flex flex-col group   border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]"
           href="/product/[id]"
           as={`/product/${props.product.name}`}
+          
         >
-          <div className="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden ">
+          <div className="relative  pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden ">
             <Image
-              className="w-full h-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
+              className=" absolute top-0 start-8 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
               src={props.product.img}
-              width={100}
+              width={350}
               height={100}
-              
               alt="Image Description"
             />
           </div>
           <div className="p-4 md:p-5 ">
-              <h3 className="text-lg font-bold  text-gray-800 dark:text-white">
-                {props.product.name}
-              </h3>
-          
-          
+            <h3 className="text-lg font-bold  text-gray-800 dark:text-white">
+              {props.product.name}
+            </h3>
+
             <div className="mt-1 text-gray-500 dark:text-gray-400">
               <div className="flex justify-between">
                 <p className="text-lg  text-gray-800 font-medium dark:text-white">
                   ₹{props.product.price}
-                <span className="text-lg line-through ms-2 font-medium  text-red-800 dark:text-red-800">
-                  ₹{props.product.price}
-                </span>
+                  <span className="text-lg line-through ms-2 font-medium  text-red-800 dark:text-red-800">
+                    ₹{props.product.price}
+                  </span>
                 </p>
-                {/* <button
-                  type="button"
-                  className="py-3 px-4  inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-300 text-black hover:bg-red-400  disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                >
-                <DescriptionModal product={props.product} />
                 
-                </button> */}
               </div>
               <p>Save ₹125 </p>
-              <p><span className="text-green-800 text-lg me-2">★</span>{props.product.ratings} </p>
+              <p>
+                <span className="text-green-800 text-lg me-2">★</span>
+                {props.product.ratings}{" "}
+              </p>
             </div>
           </div>
           {/* <div className="flex  mx-auto gap-10 mb-2"> */}

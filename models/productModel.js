@@ -25,7 +25,7 @@ const beautyProductSchema = new mongoose.Schema({
     subCategory:{
       type: String,
       required: true,
-      enum:["eyes","face","lips","hair care",'hair styling','tools & asscessories,moisturizer,masks,body care']
+      enum:["eyes","face","lips","hair care",'hair styling','tools & asscessories','moisturizer','masks','body care']
     },
     subSubCategory:{
      type:String,
