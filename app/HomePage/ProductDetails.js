@@ -10,7 +10,7 @@ const ProductDetails = ({ id }) => {
   useEffect(() => {
     async function getData() {
       try {
-        const res = await axios(`http://localhost:3000/api/${id}`);
+        const res = await axios(`/api/${id}`);
 
         setProductDes(res.data.data);
         
@@ -20,7 +20,7 @@ const ProductDetails = ({ id }) => {
     }
     getData();
   }, []);
-console.log(productDes);
+
   if (!productDes) {
     return(
       <>
