@@ -7,7 +7,7 @@ const CategoryCard = ({name}) => {
     <>
       <div className="flex flex-col w-max min-w-mix bg-red-200  border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
         <Image
-          className=" rounded-t-xl"
+          className="rounded-t-xl"
           src={makeup}
           width={300}
           height={100}
