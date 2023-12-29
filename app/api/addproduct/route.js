@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
 import BeautyProduct from "@/models/productModel";
 import connectToDatabase from "@/lib/db";
+import cloudinary from "cloudinary";
 import { Buffer } from "buffer";
 import DatauriParser from "datauri/parser";
-import fs from "fs/promises";
-import path from "path";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
   try {
@@ -28,6 +33,12 @@ export async function POST(request) {
 
     const buffer = Buffer.from(await imageFile.arrayBuffer());
 
+    const file64 = parser.format(imageFile.name, buffer);
+
+    const result = await cloudinary.uploader.upload(file64.content, {
+      resource_type: "auto",
+    });
+
     const newProduct = await BeautyProduct.create({
       name,
       brand,
@@ -37,19 +48,8 @@ export async function POST(request) {
       subSubCategory,
       mrp,
       description,
+      img: result.secure_url,
     });
-
-    const imagePath = `public/${newProduct._id}_${imageFile.name}`;
-    const publicImagePath = `/${newProduct._id}_${imageFile.name}`;
-
-    const protocol = request.headers.get("x-forwarded-proto") || "http"; 
-    const host = request.headers.get("host") || "localhost"; 
-    const fullImagePath = `${protocol}://${host}${publicImagePath}`;
-
-    await fs.writeFile(imagePath, buffer);
-
-    newProduct.img = fullImagePath;
-    await newProduct.save();
 
     return NextResponse.json(newProduct);
   } catch (error) {
