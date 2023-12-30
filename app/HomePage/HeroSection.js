@@ -21,6 +21,7 @@ const HeroSection = () => {
               <div className="flex justify-center h-full  ">
                 <Image
                   src={banner5}
+                  priority={true}
                   width="auto"
                   height="auto"
                   alt="banner-5"

@@ -12,7 +12,8 @@ const CategoryCard = ({name}) => {
           className="rounded-t-xl"
           src={makeup}
           width={300}
-          height={100}
+          height={300}
+          priority={true}
           alt="Image Description"
           />
         <div className="p-4 md:p-5">
