@@ -8,8 +8,8 @@ import dynamic from 'next/dynamic'
 
 import Link from 'next/link'
 import CategorySection from './CategorySection'
-const Section1 = dynamic(() => import('./Section1'))
-const Section2 = dynamic(() => import('./Section2'))
+const Section1 = dynamic(() => import('./Section1') , { ssr: false })
+const Section2 = dynamic(() => import('./Section2'), { ssr: false })
 
 
 const HomePage = () => {

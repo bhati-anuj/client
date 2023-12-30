@@ -9,7 +9,7 @@ const Section1 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("/api", { signal });
+        const res = await fetch("/api", { signal },{ cache: 'no-store' },{ next: { revalidate: 1 } });
         if (res.ok) {
           const data = await res.json();
           setProducts(data);

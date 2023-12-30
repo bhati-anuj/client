@@ -8,18 +8,24 @@ const LandingPage = () => {
 const [allProduct, setAllProduct] = useState();
 
 
-  useEffect(()=>{
-    const fetchData= async()=>{
-      try {
-        const res = await axios.get("/api")
-        setAllProduct(res.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData();
-  },[])
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api',{ signal },{ cache: 'no-store' },{ next: { revalidate: 1 } });
 
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setAllProduct(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+}, []);
 if (!allProduct) {
   return(
     <>
