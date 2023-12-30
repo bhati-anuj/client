@@ -4,11 +4,12 @@ import Card from "../components/Card";
 
 const Section1 = () => {
   const [products, setProducts] = useState([]);
+  const { signal } = new AbortController()
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("/api",{ cache: 'no-store' });
+        const res = await fetch("/api", { signal });
         if (res.ok) {
           const data = await res.json();
           setProducts(data);
