@@ -6,6 +6,7 @@ import AllProductTable from "./AllProductTable";
 
 const LandingPage = () => {
 const [allProduct, setAllProduct] = useState();
+const { signal } = new AbortController()
 
 
 useEffect(() => {
