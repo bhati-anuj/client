@@ -2,6 +2,7 @@ import BeautyProduct from "@/models/productModel";
 import connectToDatabase from "@/lib/db";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 1;
 export async function GET(request,{ params }) {
     try {
         await connectToDatabase();
