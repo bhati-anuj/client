@@ -9,15 +9,22 @@ const Section2 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get('/api');
-
-        setProducts(res.data);
+        const response = await fetch('/api',{ cache: 'no-store' });
+  
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        setProducts(data);
       } catch (error) {
         console.error(error);
       }
     }
+  
     fetchData();
   }, []);
+  
 
  if (products.length > 0) {
   
