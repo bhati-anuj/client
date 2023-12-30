@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import BeautyProduct from "@/models/productModel";
 import connectToDatabase from "@/lib/db";
 
+
+export const dynamic = "force-dynamic";
 export async function GET(request) {
   try {
     await connectToDatabase();

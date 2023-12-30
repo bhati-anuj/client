@@ -12,7 +12,7 @@ const { signal } = new AbortController()
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('/api',{ signal },{ cache: 'no-store' },{ next: { revalidate: 1 } });
+      const response = await fetch('/api',{ cache: 'no-store' });
 
       if (!response.ok) {
         throw new Error(`Failed to fetch data. Status: ${response.status}`);
