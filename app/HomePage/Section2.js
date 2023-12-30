@@ -9,7 +9,7 @@ const Section2 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api',{ next: { revalidate: 10 } });
+        const response = await fetch('/api',{ cache: 'no-store' });
   
         if (!response.ok) {
           throw new Error(`Failed to fetch data. Status: ${response.status}`);
