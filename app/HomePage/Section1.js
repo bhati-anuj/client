@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import axios from "axios";
 
 const Section1 = () => {
   const [products, setProducts] = useState([]);
@@ -9,9 +8,13 @@ const Section1 = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("/api" );
-
-        setProducts(res.data);
+        const res = await fetch("/api",{ next: { revalidate: 10 } });
+        if (res.ok) {
+          const data = await res.json();
+          setProducts(data);
+        } else {
+          throw new Error(`Failed to fetch data. Status: ${res.status}`);
+        }
       } catch (error) {
         console.error(error);
       }

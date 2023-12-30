@@ -4,7 +4,6 @@ import Header from "@/app/components/Header";
 import SecondHeader from "@/app/components/SecondHeader";
 import React, { useEffect, useState } from "react";
 import Card from "@/app/components/Card";
-import axios from "axios";
 
 const CategoryPageComponent = ({ params }) => {
   const decodedName = decodeURIComponent(params.id).toLowerCase();
@@ -13,19 +12,30 @@ const CategoryPageComponent = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.post("/api/category", {
-          category: `${decodedName}`,
-        });
-        setCategoryProduct(res.data.data);
-        console.log(res.data.data);
+        const res = await fetch("/api/category", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category: decodedName,
+          }),
+        },{ next: { revalidate: 10 } });
+  
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+  
+        const data = await res.json();
+        setCategoryProduct(data.data);
+        console.log(data.data);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchData();
   }, []);
-
   if (!categoryProduct) {
     return (
       <>
